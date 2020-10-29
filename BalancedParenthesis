@@ -1,0 +1,14 @@
+def longest_balanced(string):
+  counter = 0
+  longest = 0
+  stack = []
+  for i, char in enumerate(string):
+    if char == '(':
+      stack.append(i)
+    elif char == ')':
+      if stack:
+        open_i = stack.pop()
+        length = i - open_i + 1
+        longest = max(longest, length)
+  return longest
+  
