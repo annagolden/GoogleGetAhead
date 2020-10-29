@@ -1,0 +1,21 @@
+def maximum_rectangle(histogram):
+    # Find the area of the maximum rectangle under the curve.
+    # Return int tuple with the left and right indices that represent the rectangle.
+    if not bool(histogram):
+      return (-1,-1)
+    
+    maxrect = max(histogram)
+    maxrectind = (histogram.index(max(histogram)),histogram.index(max(histogram)))
+  
+    for i in range(len(histogram)):
+        for j in range(i,i+len(histogram[i:])):
+            if j == len(histogram):
+                break
+            else:
+                current = histogram[i:j+1]
+                print(current)
+                if min(current)*len(current)>maxrect:
+                    maxrect = min(current)*len(current)
+                    maxrectind = (i,j)
+  
+    return maxrectind
