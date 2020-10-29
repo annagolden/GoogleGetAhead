@@ -1,0 +1,23 @@
+class FlattenedIterator:
+    #Given a list of iterators, implement a FlattenedIterator class which incrementally iterates over the integers from all the iterators in an interleaved fashion. 
+    def __init__(self, subiterators):
+        self.subiterators = subiterators
+        
+    def hasNext(self):
+        for i in self.subiterators:
+            if i:
+                return True
+        return False
+                
+    def next(self):
+        if self.hasNext():
+            self.current = self.subiterators.pop(0)
+            if type(self.current) == list and bool(self.current):
+                self.next = self.current.pop(0)
+                if self.current:
+                    self.subiterators.append(self.current)
+                return self.next
+            elif type(self.current)==int:
+                return self.current
+        else:
+            raise Exception()
